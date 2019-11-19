@@ -1,0 +1,562 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>cn.com.yitong</groupId>
+	<artifactId>$serverName</artifactId>
+	<packaging>war</packaging>
+	<version>3.1</version>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- spring版本号 -->
+		<spring.version>4.2.5.RELEASE</spring.version>
+		<!-- mybatis版本号 -->
+		<mybatis.version>3.2.7</mybatis.version>
+		<!-- log4j日志文件管理包版本 -->
+		<slf4j.version>1.7.7</slf4j.version>
+		<log4j.version>1.2.9</log4j.version>
+		<logback.version>1.1.2</logback.version>
+		<httpclient.version>4.2.4</httpclient.version>
+
+		<ipwebaddr.version>$web</ipwebaddr.version>
+		<ipappaddr.version>$app</ipappaddr.version>
+		
+		<ipwebaddr2.version>$wweb</ipwebaddr2.version>
+		<ipappaddr2.version>$aapp</ipappaddr2.version>
+		<webflag.version>$flag</webflag.version>
+		<serverName.version>$serverName</serverName.version>
+	</properties>
+	
+	<repositories>
+		<repository>
+			<id>shbank</id>
+			<url>http://127.0.0.1:8091/nexus/content/repositories/public</url>
+		</repository>
+	</repositories>
+	
+	<dependencies>
+		<!-- 此处开始就是Spring 所有的jar了，spring3.0的jar包拆分了，所以很多 -->
+		<!-- Core utilities used by other modules. Define this if you use Spring 
+			Utility APIs (org.springframework.core.*/org.springframework.util.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- Expression Language (depends on spring-core) Define this if you use 
+			Spring Expression APIs (org.springframework.expression.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- Bean Factory and JavaBeans utilities (depends on spring-core) Define 
+			this if you use Spring Bean APIs (org.springframework.beans.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- Aspect Oriented Programming (AOP) Framework (depends on spring-core, 
+			spring-beans) Define this if you use Spring AOP APIs (org.springframework.aop.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- Application Context (depends on spring-core, spring-expression, spring-aop, 
+			spring-beans) This is the central artifact for Spring’s Dependency Injection 
+			Container and is generally always defined -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- Various Application Context utilities, including EhCache, JavaMail, 
+			Quartz, and Freemarker integration Define this if you need any of these integrations -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- Transaction Management Abstraction (depends on spring-core, spring-beans, 
+			spring-aop, spring-context) Define this if you use Spring Transactions or 
+			DAO Exception Hierarchy (org.springframework.transaction.*/org.springframework.dao.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- JDBC Data Access Library (depends on spring-core, spring-beans, spring-context, 
+			spring-tx) Define this if you use Spring’s JdbcTemplate API (org.springframework.jdbc.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- Object-to-Relation-Mapping (ORM) integration with Hibernate, JPA, 
+			and iBatis. (depends on spring-core, spring-beans, spring-context, spring-tx) 
+			Define this if you need ORM (org.springframework.orm.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- Object-to-XML Mapping (OXM) abstraction and integration with JAXB, 
+			JiBX, Castor, XStream, and XML Beans. (depends on spring-core, spring-beans, 
+			spring-context) Define this if you need OXM (org.springframework.oxm.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- Web application development utilities applicable to both Servlet and 
+			Portlet Environments (depends on spring-core, spring-beans, spring-context) 
+			Define this if you use Spring MVC, or wish to use Struts, JSF, or another 
+			web framework with Spring (org.springframework.web.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- Spring MVC for Servlet Environments (depends on spring-core, spring-beans, 
+			spring-context, spring-web) Define this if you use Spring MVC with a Servlet 
+			Container such as Apache Tomcat (org.springframework.web.servlet.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- Spring MVC for Portlet Environments (depends on spring-core, spring-beans, 
+			spring-context, spring-web) Define this if you use Spring MVC with a Portlet 
+			Container (org.springframework.web.portlet.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc-portlet</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- Support for testing Spring applications with tools such as JUnit and 
+			TestNG This artifact is generally always defined with a ‘test’ scope for 
+			the integration testing framework and unit testing stubs -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- 上面的都是Spring的jar包，可以选择性的添加 -->
+		<!-- Mybatis 开发包 -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<!-- Mybatis 和Spring的 整合包，是mybatis出的 -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>${mybatis.version}</version>
+		</dependency>
+
+		<!-- tomcat servlet开发包 -->
+		<!-- JSTL标签库 -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- mysql的数据库驱动包 -->
+		<!-- 日志打印 log4j包 -->
+		<!-- <dependency> <groupId>log4j</groupId> <artifactId>log4j</artifactId> 
+			<version>1.2.14</version> <scope>runtime</scope> </dependency> -->
+		<!-- 下面两个包 commons-dbcp,commons-pool 是配置数据源的包 -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-pool</groupId>
+			<artifactId>commons-pool</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+		<!-- Spring 文件上传的包 -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+		<!-- Spring 文件上传的依赖包 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-net</artifactId>
+			<version>1.4.1</version>
+		</dependency>
+
+		<!-- dom4j 解析 XML文件的包 -->
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<!-- 下面的三个包是在配置事务的时候用到的 spring的依赖包 -->
+		<dependency>
+			<groupId>org.apache.http.client</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.http.client</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>4.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.http.client</groupId>
+			<artifactId>httpmime</artifactId>
+			<version>4.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.8.0</version>
+		</dependency>
+		<dependency>
+			<groupId>aopalliance</groupId>
+			<artifactId>aopalliance</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.8.3</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+
+		<!-- 安全 -->
+		<dependency>
+			<groupId>rsa</groupId>
+			<artifactId>UnionControl</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>rsa</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.10</version>
+		</dependency>
+		<dependency>
+			<groupId>rsa</groupId>
+			<artifactId>bouncycastle</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>cn.com.jdkenc.api</groupId>
+			<artifactId>jdkenc-api</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>cn.com.infosec.IDCard.authapi</groupId>
+			<artifactId>authapi-api</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>cn.com.infosec.IDCard.common</groupId>
+			<artifactId>common-api</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>Union30.unionHsmApi</groupId>
+			<artifactId>UnionForSJL05</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+		<!-- 日志 -->      <!-- LOG begin -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<!-- <dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency> -->
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>1.0.13</version>
+		</dependency> 
+		<!-- LOG end -->
+		<!-- junit 测试包 -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- json工具类 -->
+		
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>2.4</version>
+		</dependency> 
+		<dependency>
+		  <groupId>com.facad</groupId>
+		  <artifactId>ejbfacad</artifactId>
+		  <version>1.0</version>
+		</dependency>
+		<dependency>
+		  <groupId>org.json</groupId>
+		  <artifactId>json</artifactId>
+		  <version>1.0</version>
+		</dependency>
+		
+		<!-- spring session redis start -->
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session-data-redis</artifactId>
+			<version>1.2.1.RELEASE</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+			<version>1.7.2.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>2.8.1</version>
+		</dependency>
+		<!-- spring session redis end -->
+		
+	</dependencies>
+
+	<!-- <build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.1</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build> -->
+	
+	<build> 
+		<finalName>${serverName.version}</finalName>
+		<plugins>
+		    <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+	        <plugin>  
+	            <groupId>org.codehaus.mojo</groupId>    
+	            <artifactId>tomcat-maven-plugin</artifactId>  
+	            <version>1.1</version>  
+	            <configuration>  
+	                <url>http://localhost:8080/manager</url>     
+	                <username>admin</username>     
+	                <password>password</password>  
+					<port>9000</port>     
+	            </configuration>
+	        </plugin>
+	        <plugin>
+	        	<artifactId>maven-war-plugin</artifactId>
+	        	<version>2.2</version>
+	        	<configuration>
+	        		<warSourceIncludes>
+	        			WEB-INF/**
+	        		</warSourceIncludes>
+	        		<warSourceExcludes>
+						WEB-INF/spring/spring-mybatis.xml,WEB-INF/logback.xml	
+	        		</warSourceExcludes>
+	        		<packagingExcludes>
+	        			WEB-INF/classes/META-INF/*.*,WEB-INF/classes/cn/com/yitong/ares/net/esb/SocketFactory4esb.*
+	        		</packagingExcludes>
+	        	</configuration>
+	        </plugin>
+	        <plugin>
+            	<groupId>org.apache.maven.plugins</groupId>  
+                <artifactId>maven-assembly-plugin</artifactId>  
+                <executions>
+                	<execution>
+                		<id>test-tar</id>
+                		<phase>package</phase>
+                		<goals>
+                			<goal>single</goal>
+                		</goals>
+                		<configuration>
+                			<finalName>iweb_${serverName.version}</finalName>
+                			<descriptors>
+                				<descriptor>src/assembly.xml</descriptor>
+                			</descriptors>
+                		</configuration>
+                	</execution>
+                </executions>
+            </plugin>
+			<!-- 静态删包 -->
+	        <plugin>
+	        	<groupId>org.codehaus.mojo</groupId>
+			    <artifactId>wagon-maven-plugin</artifactId>
+			    <version>1.0</version>
+	        	<executions>
+	        		<execution>
+	        			<id>tar-deploy2</id>
+	        			<phase>package</phase>
+	        			<goals>
+	        				<goal>sshexec</goal>
+	        			</goals>
+	        			<configuration>
+			        		<fromFile>target/iweb_${serverName.version}.tar</fromFile>
+			        		<url>scp://mobile:abcd1234@${ipwebaddr.version}/mobile/www</url>
+			        		<displayCommandOutputs>true</displayCommandOutputs>
+			        		<commands>
+			        			<command>cd /mobile/www;rm -rf *.tar</command>
+			        		</commands>
+			        	</configuration>
+	        		</execution>
+	        	</executions>
+	        </plugin>
+            <!-- 静态换版 -->
+	        <plugin>
+	        	<groupId>org.codehaus.mojo</groupId>
+			    <artifactId>wagon-maven-plugin</artifactId>
+			    <version>1.0</version>
+	        	<executions>
+	        		<execution>
+	        			<id>tar-deploy</id>
+	        			<phase>package</phase>
+	        			<goals>
+	        				<goal>upload-single</goal>
+	        				<goal>sshexec</goal>
+	        			</goals>
+	        			<configuration>
+			        		<fromFile>target/iweb_${serverName.version}.tar</fromFile>
+			        		<url>scp://mobile:abcd1234@${ipwebaddr.version}/mobile/www</url>
+			        		<displayCommandOutputs>true</displayCommandOutputs>
+			        		<commands>
+			        			<command>cd /mobile/www/iweb_${serverName.version};tar -xf /mobile/www/iweb_${serverName.version}.tar;cd /mobile/jiangjun;sh md.sh</command>
+			        		</commands>
+			        	</configuration>
+	        		</execution>
+	        	</executions>
+	        </plugin>
+	        <!-- 静态换版2 -->
+	        $buildweb
+	        <!-- 应用删war包 -->
+	        <plugin>
+	        	<groupId>org.codehaus.mojo</groupId>
+			    <artifactId>wagon-maven-plugin</artifactId>
+			    <version>1.0</version>
+	        	<executions>
+	        		<execution>
+	        			<id>upload-deploy2</id>
+	        			<phase>package</phase>
+	        			<goals>
+	        				<goal>sshexec</goal>
+	        			</goals>
+	        			<configuration>
+			        		<url>scp://mobile:abcd1234@${ipappaddr.version}/mobile/app/upload</url>
+			        		<displayCommandOutputs>true</displayCommandOutputs>
+			        		<commands>
+			        			<command>cd /mobile/app/upload;rm -rf *.war</command>
+			        		</commands>
+			        	</configuration>
+	        		</execution>
+	        	</executions>
+	        </plugin>
+	        <!-- 应用换版 -->
+	        <plugin>
+	        	<groupId>org.codehaus.mojo</groupId>
+			    <artifactId>wagon-maven-plugin</artifactId>
+			    <version>1.0</version>
+	        	<executions>
+	        		<execution>
+	        			<id>upload-deploy</id>
+	        			<phase>package</phase>
+	        			<goals>
+	        				<goal>upload-single</goal>
+	        				<goal>sshexec</goal>
+	        			</goals>
+	        			<configuration>
+			        		<fromFile>target/${serverName.version}.war</fromFile>
+			        		<url>scp://mobile:abcd1234@${ipappaddr.version}/mobile/app/upload</url>
+			        		<displayCommandOutputs>true</displayCommandOutputs>
+			        		<commands>
+			        		    <!-- <command>package -e</command> -->
+			        			<!-- <command>sh /mobile/app/startAndStop/startAndStop.sh</command> -->
+			        			<command>sh /mobile/jiangjun/start.sh ${webflag.version} 2>/dev/null</command>
+			        		</commands>
+			        	</configuration>
+	        		</execution>
+	        	</executions>
+	        </plugin>
+	        <!-- 应用换版2 -->
+	        $buildapp
+		</plugins>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+		        <artifactId>wagon-ssh</artifactId>
+		        <version>2.8</version>
+			</extension>
+		</extensions>
+	</build>
+</project>
